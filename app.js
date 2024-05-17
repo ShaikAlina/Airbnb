@@ -18,7 +18,7 @@ async function main(){
 }
 
 main().then(()=>{
-    console.log("connected to DB");
+    console.log("Connected to Database");
 }).catch((err)=>{
     console.log(err);
 });
@@ -52,8 +52,6 @@ app.post("/listings" , async (req , res)=>{
    const newListing = new Listing(listing);
    await newListing.save();
    res.redirect("/listings" );
-
-    console.log(listing);
 });
 
 //Edit Route
@@ -78,25 +76,8 @@ app.delete("/listings/:id" , async (req,res) => {
     res.redirect("/listings");
 });
 
-
+//server listening
 app.listen(1111 , ()=>{
     console.log("server is listening ");
 });
-
-
-
-// app.get("/testlisting", async(req,res)=>{
-//     let samplelisting = new listing({
-//         title:"my new villa",
-//         description:"near beach",
-//         price : "120000",
-//         loacation: "hyderabad",
-//         country : "india"
-//     });
-//    await samplelisting.save();
-
-//     console.log("sample was saved to DB");
-//     res.send("successful testing");
-  
-// });
 
