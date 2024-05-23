@@ -34,9 +34,9 @@ app.get("/listings" , async(req,res)=>{
     res.render("./listings/index.ejs",{alllisting});
 });
 
-//create Route
+//New Route
 app.get("/listings/new",(req,res)=>{
-    res.render("./listings/create.ejs");
+    res.render("./listings/new.ejs");
 });
 
 //show Route
@@ -77,7 +77,7 @@ app.delete("/listings/:id" , async (req,res) => {
 });
 
 //server listening
-app.listen(1111 , ()=>{
+app.listen(8080 , ()=>{
     console.log("server is listening ");
 });
 
