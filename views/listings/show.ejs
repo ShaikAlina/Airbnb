@@ -13,7 +13,7 @@
             <div class="card-text">
                 <p><b><%= listing.title %></b></p>
                 <p><%= listing.description %></p>
-                <p>&#8377;<%= listing.price.toLocaleString('en-IN') %> %></p>
+                <%= listing.price ? listing.price.toLocaleString("en-IN") : "Price not available" %> /night          
                 <p><%= listing.location %></p>
                 <p><%= listing.country %></p>
             </div>
