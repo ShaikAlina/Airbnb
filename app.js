@@ -51,7 +51,8 @@ app.get("/listings/:id" ,wrapAsync( async(req,res)=>{
 
 //create Route
 app.post("/listings" ,wrapAsync( async (req , res , next)=>{
- 
+   let result =  listingSchema(req.body.listing);
+   console.log(result); 
     const newListing = new Listing(req.body.listing);
         await newListing.save();
         res.redirect("/listings" );
