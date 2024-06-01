@@ -8,6 +8,7 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const {listingSchema} = require("./schema.js");
+const { rmSync } = require("fs");
 
 app.set("view engine" , "ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -31,6 +32,17 @@ app.get("/" , (req,res)=>{
     res.send("working root");
 });
 
+const validateListing = (req , res , next)=>{
+    let {error} = listingSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el)=> el.message).join(",");
+        throw new ExpressError(400 , errMsg);
+    }
+    else{
+        next();
+    }
+}
+
 //index.ejs
 app.get("/listings" ,wrapAsync( async(req,res)=>{
     let alllisting = await Listing.find({});
@@ -50,12 +62,12 @@ app.get("/listings/:id" ,wrapAsync( async(req,res)=>{
 }));
 
 //create Route
-app.post("/listings" ,wrapAsync( async (req , res , next)=>{
-   let result =  listingSchema(req.body.listing);
-   console.log(result); 
+app.post("/listings" ,
+    validateListing,
+    wrapAsync( async (req , res , next)=>{
     const newListing = new Listing(req.body.listing);
-        await newListing.save();
-        res.redirect("/listings" );
+    await newListing.save();
+    res.redirect("/listings" );
    
 }));
 
@@ -67,17 +79,18 @@ app.get("/listings/:id/edit" ,wrapAsync(async (req , res)=>{
 }));
 
 //Update Route
-app.put("/listings/:id",wrapAsync( async (req , res)=>{
+app.put("/listings/:id",
+    validateListing,
+    wrapAsync( async (req , res)=>{
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id , {...req.body.listing});
-    res.redirect("/listings" );
+    res.redirect(`/listings/${id}` );
 }));
 
 //delete Route
 app.delete("/listings/:id" ,wrapAsync( async (req,res) => {
     let {id} = req.params;
     let del_listing = await Listing.findByIdAndDelete(id);
-    console.log(del_listing);
     res.redirect("/listings");
 }));
 

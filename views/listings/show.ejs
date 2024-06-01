@@ -4,14 +4,13 @@
     <br>
     <div class="row">
         <div class="col-8 offset-3">
-            <h2>Listing Details</h2>
+            <h2><%= listing.title %></h2>
         </div>
   
     <div class="card col-6 offset-3">
         <img src="<%= listing.image %>"  class="card-img-top show-img " alt="listing_image"><br>
         <div class="card-body">
             <div class="card-text">
-                <p><b><%= listing.title %></b></p>
                 <p><%= listing.description %></p>
                 <p>&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
                 <p><%= listing.location %></p>
