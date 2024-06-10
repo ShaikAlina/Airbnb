@@ -2,7 +2,12 @@
 
 <body>
     <div class="row">
-    <form method="post" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation">
+    <form 
+    method="post" 
+    action="/listings/<%= listing._id %>?_method=PUT" 
+    novalidate 
+    class="needs-validation"
+    enctype="multipart/form-data">
         <div class="col-8 offset-2" >
             <br>
         <h2>Edit this listing</h2>
@@ -30,14 +35,17 @@
             </div>   
 
             <div class="mb-3">
-                <label for="image" class="form-label">Image</label>
+                Original Image <br>
+                <img src="<%= originalImageUrl %>" alt="">
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">upload New Image</label>
                 <input 
                 name="listing[image]" 
-                placeholder="Enter Image URL/Link" 
                 class="form-control" 
-                value="<%= listing.image %>" 
-                required>
-                <div class="invalid-feedback">Image is required!</div>
+                type="file"
+                >
             </div>
 
           <div class="row ">
@@ -84,7 +92,4 @@
         
     </form>
 </div>
-
-<script src="/js/script.js"></script>
-
 </body>

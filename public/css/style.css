@@ -54,7 +54,7 @@ font-size: 2rem;
     text-decoration: underline;
 }
 
-.card{
+.listing-card{
     border: none !important;
     margin-bottom: 2rem;
 }
@@ -103,4 +103,16 @@ font-size: 2rem;
 
 .btns{
     display: flex;
+}
+
+.show-card{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Map */
+
+#map{
+  height: 300px;
+  width: 90vh; 
 }

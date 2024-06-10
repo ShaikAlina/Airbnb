@@ -1,10 +1,11 @@
 <% layout("/layouts/boilerplate") -%>
 
-<body>
+
   <br />
+  <div class="col-8 offset-2">
   <h3>Create new listing</h3>
   <br />
-  <form action="/listings" method="POST" class="needs-validation" novalidate>
+  <form action="/listings" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
     <div class="mb-3">
       <label for="title" class="form-label"
         >Title<span class="required"></span></label
@@ -27,27 +28,26 @@
         name="listing[description]"
         placeholder="Enter a descripition"
         cols="30"
-        rows="6"
+        rows="3"
         class="form-control"
         required
       ></textarea>
       <div class="invalid-feedback">Please give a description.</div>
     </div>
 
-    <div class="mb-3">
-      <label for="image" class="form-label"
-        >Image URL<span class="required"></span></label
-      >
-      <input
-        type="text"
-        name="listing[image]"
-        placeholder="Enter image URL/Link"
-        class="form-control"
-        
-      />
-      <div class="invalid-feedback">Please enter a image link .</div>
-    </div>
-
+      <div class="mb-3 ">
+        <label for="image" class="form-label"
+          >Image URL<span class="required"></span></label
+        >
+        <input
+          type="file"
+          name="listing[image]"
+          placeholder="Enter image URL/Link"
+          class="form-control"
+          
+        />
+        <div class="invalid-feedback">Please enter a image link .</div>
+      </div>
 
     <div class="row">
       <div class="mb-3 col-md-4">
@@ -107,4 +107,5 @@
       </button>
     </div>
   </form>
-</body>
+</div>
+
